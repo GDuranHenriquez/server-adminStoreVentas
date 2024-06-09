@@ -34,6 +34,8 @@ const { DB_fORCE, DB_HOST } = process.env;
 const dbForce = DB_fORCE == '0' ? false : true;
 const defaultDniType = require('./src/controllers/dniType/defaultTipoDni.js');
 const clientDefaultSeeder = require('./src/utils/clientDefaultSeeder.js');
+const { transporter } = require('./src/utils/trnasportNodeMailer.js')
+
 //const InitializateDataModels = require('./src/middleware/index.js');
 
 // Syncing all the models at once.
@@ -52,9 +54,12 @@ const getPort = DB_HOST === 'localhost' ? portLocalhost : port
 conn.sync({ force: dbForce }).then(() => {
   defaultDniType().then(() => {
     clientDefaultSeeder().then(()=>{
-      server.listen(getPort, "0.0.0.0", () => {
-      console.log(`%s listening at ${getPort}`); // eslint-disable-line no-console
-      });    
+      transporter.verify().then(() => {
+        console.log('Ready for send emails')
+        server.listen(getPort, "0.0.0.0", () => {
+          console.log(`%s listening at ${getPort}`); // eslint-disable-line no-console
+          }); 
+      });         
     });    
   });  
 });
