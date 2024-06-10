@@ -8,7 +8,7 @@ const {
 
 const getResetPassword = async (req, res) => {
   try {
-    const { email } = req.body
+    const { email, endPoint } = req.body
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if(!email || !emailRegex.test(email)){
@@ -22,7 +22,7 @@ const getResetPassword = async (req, res) => {
     
     const idUser = user.dataValues.id
     const tkn = generateResetToken({idUser})
-    const link = `${HOSTCLIENT}?token=${tkn}`
+    const link = endPoint + `?token=${tkn}`
     
     await sendResetPasssword(email, link);
 
