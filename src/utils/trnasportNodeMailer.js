@@ -12,9 +12,9 @@ const transporter = nodemailer.createTransport({
     /* type: 'OAuth2', */
     user: process.env.NODEMAILER_EMAIL,
     pass: process.env.NODEMAILER_PASS,
-    /* clientId: process.env.OAUTH_CLIENTID,
+    clientId: process.env.OAUTH_CLIENTID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    refreshToken: process.env.OAUTH_REFRESH_TOKEN */
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN
   }
 });
 
