@@ -30,12 +30,12 @@ app.listen(PORT_LISTEN, ()=>{
 }); */
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { DB_fORCE, DB_HOST } = process.env;
-const dbForce = DB_fORCE == '0' ? false : true;
+const { DB_fORCE, PORT_LISTEN } = process.env;
 const defaultDniType = require('./src/controllers/dniType/defaultTipoDni.js');
 const clientDefaultSeeder = require('./src/utils/clientDefaultSeeder.js');
 const { transporter } = require('./src/utils/trnasportNodeMailer.js')
 
+const dbForce = DB_fORCE == '0' ? false : true;
 //const InitializateDataModels = require('./src/middleware/index.js');
 
 // Syncing all the models at once.
@@ -47,9 +47,9 @@ const { transporter } = require('./src/utils/trnasportNodeMailer.js')
   });  
 }); */
 
-const port = process.env.PORT || 4000
+//const port = process.env.PORT_LISTEN || 4000
 const portLocalhost = 3001
-const getPort = DB_HOST === 'localhost' ? portLocalhost : port
+const getPort = PORT_LISTEN && parseInt(PORT_LISTEN) !== 0 ? PORT_LISTEN : portLocalhost
 
 conn.sync({ force: dbForce }).then(() => {
   defaultDniType().then(() => {
