@@ -48,7 +48,7 @@ const dbForce = DB_fORCE == '0' ? false : true;
 }); */
 
 //const port = process.env.PORT_LISTEN || 4000
-const portLocalhost = 3001
+const portLocalhost = 3003
 const getPort = PORT_LISTEN && parseInt(PORT_LISTEN) !== 0 ? PORT_LISTEN : portLocalhost
 
 conn.sync({ force: dbForce }).then(() => {
