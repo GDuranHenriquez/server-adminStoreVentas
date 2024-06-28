@@ -22,6 +22,7 @@ const routerDepartamento = require('./routes/routerDepartamento.js')
 require('./db.js');
 
 const server = express();
+server.use(cors());
 
 server.name = 'Magnament Inventari';
 
@@ -36,7 +37,6 @@ server.use(morgan('dev'));
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 }); */
-server.use(cors());
 
 //server.use('/', routes);
 server.use('/data-user', authenticate, routerDataUser);
