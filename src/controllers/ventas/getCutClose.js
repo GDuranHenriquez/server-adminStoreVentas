@@ -121,6 +121,7 @@ async function getCutClose(req, res){
           } 
         }
 
+
         const DataVentasDetalles = [];
         for(let k = 0; k < lisData.length; k++){
           const venta = lisData[k];
@@ -128,7 +129,7 @@ async function getCutClose(req, res){
           DataVentasDetalles.push(arrVentaDetalle)
         }
         
-        const htmlAllData = htmlCutClose(DataVentasDetalles, initDay, endDay, depart[0], infoCuotClose, recividoEfectivo)
+        const htmlAllData = htmlCutClose(DataVentasDetalles, initDay, endDay, depart.nombre, infoCuotClose, recividoEfectivo)
         
         const bs64Pdf = await generatePdfCutClose(htmlAllData);
                 
