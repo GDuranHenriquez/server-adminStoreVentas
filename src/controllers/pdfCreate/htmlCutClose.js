@@ -1,7 +1,7 @@
 const moment = require('moment-timezone');
 
 const htmlCutClose = (data, initDay, endDay, departamento, infoCuotClose, recibido) => {
-  console.log('numFactura')
+  
   const getDateMoment = (date) => {
     const fechaModificada = moment.utc(date).tz('America/Caracas');
     const fechaFormateada = fechaModificada.format('YYYY-MM-DD hh:mm:ss');
