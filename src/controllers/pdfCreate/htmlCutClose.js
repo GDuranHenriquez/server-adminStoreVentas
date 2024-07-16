@@ -1,18 +1,20 @@
 const moment = require('moment-timezone');
 
 const htmlCutClose = (data, initDay, endDay, departamento, infoCuotClose, recibido) => {
-  
+  console.log('numFactura')
   const getDateMoment = (date) => {
     const fechaModificada = moment.utc(date).tz('America/Caracas');
     const fechaFormateada = fechaModificada.format('YYYY-MM-DD hh:mm:ss');
     return fechaFormateada
   }
-
+ 
   const getHtmlDetailVenta = (arrDetail) => {
     const venta = arrDetail[0].venta;
     const nrows = arrDetail.length;
 
     let numFactura =  venta.num_factura.toString();
+
+    
         
     for(let j=0; j <= (6 - numFactura.length); j++){
       numFactura = '0' + numFactura;

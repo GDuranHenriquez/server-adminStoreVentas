@@ -127,8 +127,9 @@ async function getCutClose(req, res){
           const arrVentaDetalle = listDetalleVenta.filter((detalle) => detalle.idVenta === venta.id);
           DataVentasDetalles.push(arrVentaDetalle)
         }
-        const htmlAllData = htmlCutClose(DataVentasDetalles, initDay, endDay, departamento, infoCuotClose, recibido)
-        console.log('DataVentasDetalles')
+        
+        const htmlAllData = htmlCutClose(DataVentasDetalles, initDay, endDay, departamento, infoCuotClose, recividoEfectivo)
+        
         const bs64Pdf = await generatePdfCutClose(htmlAllData);
                 
         res.setHeader('Cache-Control', 'no-store');
