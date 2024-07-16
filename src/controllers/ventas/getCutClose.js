@@ -35,7 +35,7 @@ async function getCutClose(req, res){
       attributes: ['nombre']
     });
     depart = depart.dataValues;
-
+    
     if(!initDay || !endDay){
       return res.status(200).json({error: 'indique un rango de fecha correcto'});
     }else{
