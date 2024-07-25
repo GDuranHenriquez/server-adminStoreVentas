@@ -23,7 +23,6 @@ const sendResetPasssword = async (email, resetLink) => {
     const templatePath = process.env.RESET_PASSWORD;
     const templateContent = await fs.readFile(templatePath, 'utf-8');
     const emailContent = templateContent.replace(/{{resetLink}}/g, resetLink);
-    console.log('aqui')
 
     await transporter.sendMail({
           from:  process.env.NODEMAILER_EMAIL,

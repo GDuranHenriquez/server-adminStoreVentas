@@ -23,7 +23,6 @@ async function createPdfTags(req, res){
       if (err) {
         console.log(err)
       } else {
-        console.log(buffer)
         var pdfBuffer = new Buffer(buffer)
         res.setHeader('Content-disposition', 'inline; filename="test.pdf"');
         res.setHeader('Content-type', 'application/pdf');

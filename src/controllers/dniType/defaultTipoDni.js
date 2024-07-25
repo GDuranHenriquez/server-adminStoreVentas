@@ -19,7 +19,8 @@ async function defaultDniType(req, res){
     })
 
   } catch (error) {
-    return console.log(error)
+    console.log(error)
+    return error
   }
 }
 

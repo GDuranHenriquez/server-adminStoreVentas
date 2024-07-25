@@ -20,7 +20,8 @@ async function clientDefaultSeeder(){
 
     return 0
   } catch (error) {
-    return console.log(error)
+    console.log(error)
+    return error
   }
 
 }

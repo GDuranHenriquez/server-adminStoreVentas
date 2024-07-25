@@ -43,7 +43,6 @@ const deleteVenta = async (req, res) => {
         }
       });
     }
-    console.log('aqui')
     await Venta.update({status: false}, {
       where: {
         num_factura: numbersell
