@@ -8,6 +8,7 @@ const addSubProduct = require('../controllers/producto/addSubStock.js')
 const createPdfTags = require('../controllers/pdfCreate/createPdfTags.js')
 const postManyProduct = require('../controllers/producto/postManyProducts.js')
 const getSatactProducts = require('../controllers/statistics/getStactProducts.js')
+const getReportProducts = require('../controllers/producto/getReportProducts.js')
 
 const productRouter = express.Router();
 // TODAS LAS REQ QUE LLEGUEN A ESTE ARCHIVO TIENEN EL "/producto" IMPLICITO
@@ -15,6 +16,7 @@ const productRouter = express.Router();
 //para llegar a la ruta 3001/producto/"lo que se necesita";
 productRouter.put('/addSubProduct', addSubProduct)
 productRouter.post('/add-many-products', postManyProduct)
+productRouter.post('/report-products', getReportProducts)
 productRouter.post('/', addProducto);
 productRouter.post('/get-pdf-tags', createPdfTags)
 productRouter.get('/codigo-nombre-ptv/wordSearch/:wordSearch/id_departamento/:id_departamento', getSeaechProduct);
