@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-
+const path = require('path');
 const { authenticate } = require('./auth/athenticate');
 
 //Require All Routes.
@@ -16,8 +16,10 @@ const dniTipoRouter = require('./routes/dniTipoRouter.js');
 const ventasRouter = require('./routes/ventasRouter.js');
 const routerLoginRegister = require('./routes/routerLoginRegister.js');
 const tokenRouter = require('./routes/routerToken.js');
-const routerDataUser = require('./routes/routerProtecteDateUser')
-const routerDepartamento = require('./routes/routerDepartamento.js')
+const routerDataUser = require('./routes/routerProtecteDateUser');
+const routerDepartamento = require('./routes/routerDepartamento.js');
+const orderRouter = require('./routes/orderRouters.js');
+const ubicacionOrdenRouter = require('./routes/ubicacionOrdenRouter.js');
 
 require('./db.js');
 
@@ -48,14 +50,18 @@ server.use('/data-user', authenticate, routerDataUser);
 
 server.use('/categorias', categoriasRouter);
 server.use('/productos', authenticate ,productRouter);
-server.use('/presentacion', presentacionRouter);
+server.use('/presentacion', authenticate, presentacionRouter);
 server.use('/departamento', routerDepartamento);
 server.use('/tipoDni', dniTipoRouter);
 server.use('/cliente', clientRouter);
+server.use('/ubicacionOrden', ubicacionOrdenRouter);
 server.use('/venta', authenticate, ventasRouter);
 server.use('/usuario', usuarioRouter);
 server.use('/sign-in-out', routerLoginRegister);
 server.use('/token', tokenRouter);
+server.use('/orden', orderRouter);
+server.use('/upload', express.static(path.join(__dirname, 'upload')));
+
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

@@ -3,7 +3,7 @@ const htmlReportProducts = require('./htmlReportProducts')
 
 const options = { format: 'Letter' };
 
-const createPDFCutClose = (req, res) => {
+const createPDFreportProducts = (req, res) => {
   try {
     const html = htmlReportProducts();
     pdf.create(html, options).toBuffer(function(err, buffer){
@@ -23,4 +23,4 @@ const createPDFCutClose = (req, res) => {
   }
 }
 
-module.exports = createPDFCutClose;
+module.exports = createPDFreportProducts;

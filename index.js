@@ -36,30 +36,15 @@ const clientDefaultSeeder = require('./src/utils/clientDefaultSeeder.js');
 const { transporter } = require('./src/utils/trnasportNodeMailer.js')
 
 const dbForce = DB_fORCE == '0' ? false : true;
-//const InitializateDataModels = require('./src/middleware/index.js');
 
-// Syncing all the models at once.
-/* conn.sync({ force: true }).then(() => {
-  InitializateDataModels().then(() => {
-      server.listen(3001, () => {
-      console.log('%s listening at 3001'); // eslint-disable-line no-console
-    });
-  });  
-}); */
-
-//const port = process.env.PORT_LISTEN || 4000
 const portLocalhost = 3003
 const getPort = PORT_LISTEN && parseInt(PORT_LISTEN) !== 0 ? PORT_LISTEN : portLocalhost
 
-conn.sync({ force: dbForce }).then(() => {
-  defaultDniType().then(() => {
-    clientDefaultSeeder().then(()=>{
-      transporter.verify().then(() => {
-        console.log('Ready for send emails')
-        server.listen(getPort, "0.0.0.0", () => {
-          console.log(`%s listening at ${getPort}`); // eslint-disable-line no-console
-          }); 
-      });         
-    });    
-  });  
+conn.sync({ force: dbForce }).then(() => {  
+  transporter.verify().then(() => {
+    console.log('Ready for send emails')
+    server.listen(getPort, "0.0.0.0", () => {
+      console.log(`%s listening at ${getPort}`); // eslint-disable-line no-console
+    }); 
+  });     
 });

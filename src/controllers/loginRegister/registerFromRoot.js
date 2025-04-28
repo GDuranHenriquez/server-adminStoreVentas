@@ -11,7 +11,7 @@ const {
   PASSWORD_ACCESS
 } = process.env;
 
-
+const levels = ['root', 'caja', 'user', 'vendedor'];
 /* const { sendMailNewUser } = require('../../utils/nodemailer'); */
 
 const postRegisterFromRoot = async (req, res) => {
@@ -22,7 +22,7 @@ const postRegisterFromRoot = async (req, res) => {
     if(!nombre){
       return res.status(403).json({error: 'No se indicó el nombre'})
     };
-    if(!level){
+    if(!level || typeof level !== 'string' || !levels.includes(level.toLowerCase().trim())){
       return res.status(403).json({error: 'No se indicó el tipo de usuario'}) 
     };
     if(!direccion){
@@ -66,7 +66,7 @@ const postRegisterFromRoot = async (req, res) => {
     //const compare = bcrypt.compareSync(password, userPass);    
     
     const registerAcountUser = await Usuario.create({password: passCrypt,
-      correo: correo, nombre: nombre , level: level, direccion: direccion, 
+      correo: correo, nombre: nombre , level: level.toLowerCase().trim(), direccion: direccion, 
       telefono: telefono, dni: dni, usuarioTipoDni: tipoDni
     })
 

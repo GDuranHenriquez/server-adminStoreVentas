@@ -54,7 +54,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Categoria, Producto, Presentacion, Cliente, DetalleVenta, TazaDolar, TipoDni, Usuario, Venta, Departamento } = sequelize.models;
+const { StatusPagos, StatusOrden, UbicacionOrden, Categoria, Producto, Presentacion, Cliente, DetalleVenta, TazaDolar, TipoDni, Usuario, Venta, Departamento, Orden, DetalleOrden } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -88,7 +88,26 @@ DetalleVenta.belongsTo(Producto, { foreignKey:'productId', as: 'producto', times
 DetalleVenta.belongsTo(Venta, {as: 'venta', foreignKey:'idVenta', timestamps: false, createdAt: false, updatedAt: false})
 DetalleVenta.belongsTo(TazaDolar, {as: 'tasaDolar', foreignKey:'idTasaDolar', timestamps: false, createdAt: false, updatedAt: false})
 
+//Orden
+Orden.hasMany(DetalleOrden, { as: 'detalleOrden', foreignKey: 'idOrden', timestamps: false, createdAt: false, updatedAt: false});
+Orden.belongsTo(Cliente, {as: 'orden_cliente', foreignKey:'ordenCliente', timestamps: false, createdAt: false, updatedAt: false})
+Orden.belongsTo(Usuario, {as: 'orden_usuario', foreignKey:'ordenUsuario', timestamps: false, createdAt: false, updatedAt: false})
+Orden.belongsTo(StatusPagos, {as: 'orden_statusPago', foreignKey:'ordenStatusPago', timestamps: false, createdAt: false, updatedAt: false})
+Orden.belongsTo(StatusOrden, {as: 'orden_statusOrden', foreignKey:'ordenStatusOrden', timestamps: false, createdAt: false, updatedAt: false})
 
+//DetalleOrden
+DetalleOrden.belongsTo(Orden, {as: 'detalleOrden', foreignKey:'idOrden', timestamps: false, createdAt: false, updatedAt: false})
+DetalleOrden.belongsTo(UbicacionOrden, {as: 'detalleOrden_ubicacion', foreignKey:'ubicacion', timestamps: false, createdAt: false, updatedAt: false})
+
+//StatusOrden
+StatusOrden.hasMany(Orden, { as: 'orden_statusOrden', foreignKey: 'ordenStatusOrden', timestamps: false, createdAt: false, updatedAt: false})
+
+//StatusPago
+StatusPagos.hasMany(Orden, { as: 'orden_statusPago', foreignKey: 'ordenStatusPago', timestamps: false, createdAt: false, updatedAt: false})
+
+//UbicacionOrden
+UbicacionOrden.hasMany(Orden, { as: 'orden_ubicacion', foreignKey: 'ordenUbicacion', timestamps: false, createdAt: false, updatedAt: false})
+UbicacionOrden.hasMany(DetalleOrden, { as: 'detalleOrden_ubicacion', foreignKey: 'ubicacion', timestamps: false, createdAt: false, updatedAt: false})
 
 // Relación de modelos VideoGame y Platforms.
 /* Videogame.belongsToMany(Platform, { through: 'VideoGamePlatform', timestamps: false, createdAt: false, updatedAt: false});
