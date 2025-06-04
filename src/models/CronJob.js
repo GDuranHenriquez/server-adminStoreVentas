@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) =>{
-    sequelize.define('cron_job', 
+    sequelize.define('cronJob', 
         {
             id:{
                 type: DataTypes.INTEGER,
@@ -37,7 +37,7 @@ module.exports = (sequelize) =>{
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            update_at:{
+            updated_at:{
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -46,7 +46,7 @@ module.exports = (sequelize) =>{
           timestamps: false,
           createdAt: 'created_at',
           updatedAt: 'updated_at',
-          tableName: 'cron_job'    
+          tableName: 'cronJob'    
         }
     )
 }
