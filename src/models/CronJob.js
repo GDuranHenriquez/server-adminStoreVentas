@@ -43,7 +43,7 @@ module.exports = (sequelize) =>{
             },
         },
         {
-          timestamps: false,
+          timestamps: true,
           createdAt: 'created_at',
           updatedAt: 'updated_at',
           tableName: 'cronJob'    

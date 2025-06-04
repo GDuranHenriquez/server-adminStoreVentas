@@ -9,9 +9,11 @@ const { CONFIG_RATE } = process.env
 async function getRateDollar(req, res){
   try {
 
-    const { data } = await axios.get('https://worldtimeapi.org/api/timezone/America/Caracas');
+    //const { data } = await axios.get('https://worldtimeapi.org/api/timezone/America/Caracas');
     /* const data = await response.json(); */
-    const currentDate = new Date(data.utc_datetime);
+    let currentDate = new Date();
+    const offsetCaracas = -4 * 60 * 60 * 1000; // -4 horas en milisegundos
+    currentDate = new Date(currentDate.getTime() + offsetCaracas);
     //obtener la hora
     const hora = String(currentDate.getHours()).padStart(2, '0');
     const minutos = String(currentDate.getMinutes()).padStart(2, '0');
