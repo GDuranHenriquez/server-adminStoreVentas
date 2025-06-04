@@ -35,24 +35,22 @@ async function getRateDollar(req, res){
 
     }else{
 
-      const httpsAgent = new https.Agent({
-        rejectUnauthorized: false,
-      });
       const url = 'https://www.bcv.org.ve/';
+      const response = await axios.get(url, {
+          httpsAgent: new https.Agent({
+              rejectUnauthorized: false
+          })
+      });
 
-      const response = await axios.get(url, { httpsAgent });
-      const html = response.data;
-      const $ = cheerio.load(html);
-      const dollarElement = $('#dolar > div > div > div.col-sm-6.col-xs-6.centrado > strong');
-      const rateDollar = dollarElement.text();
-      const textRateDollar = rateDollar.trim().replace(',', '.');
-      const numberRateDolar = parseFloat(textRateDollar);
-      const dataTasaDollar = {tasa: Number(numberRateDolar.toFixed(2)), fecha: fecha}
+      const $ = cheerio.load(response.data);
+      const dollarElement = $('#dolar strong');      
+      let dolarRate = parseFloat(dollarElement.text().trim().replace(',', '.'));
+      //const dateElement = $('.date-display-single');
+      //let rateDate = new Date(dateElement.attr('content'));
+      let formattedDate = new Date().toISOString();
+      dolarRate = Math.round(dolarRate * 10000) / 10000;
 
-      if(!numberRateDolar){
-        return res.status(404).json({error: 'no se pudo obtener la tasa del dolar'});
-      }
-
+      const dataTasaDollar = {tasa: dolarRate, fecha: formattedDate}
       
       const dataMoreRecent = await TazaDolar.findOne({order: [['fecha', 'DESC']]});
 
