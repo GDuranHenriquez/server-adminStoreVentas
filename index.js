@@ -44,7 +44,7 @@ conn.sync({ force: dbForce }).then(() => {
   transporter.verify().then(() => {
     console.log('Ready for send emails')
     server.listen(getPort, "0.0.0.0", () => {
-      console.log(`%s listening at ${getPort}`); // eslint-disable-line no-console
+      console.log(`%s listening at ${getPort}`);
     }); 
   });     
 });
