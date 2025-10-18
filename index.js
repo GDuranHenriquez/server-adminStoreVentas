@@ -41,6 +41,7 @@ const portLocalhost = 3003
 const getPort = PORT_LISTEN && parseInt(PORT_LISTEN) !== 0 ? PORT_LISTEN : portLocalhost
 
 conn.sync({ force: dbForce }).then(() => {  
+  console.log('Ready connect to Data Base');
   transporter.verify().then(() => {
     console.log('Ready for send emails')
     server.listen(getPort, "0.0.0.0", () => {
