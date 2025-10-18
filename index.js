@@ -48,6 +48,9 @@ conn.sync({ force: dbForce }).then(() => {
       console.log(`%s listening at ${getPort}`);
     }); 
   }).catch((error) => {
-    console.error('Error with email transporter: ', error);
-  });   
+    console.error('Error with email transporter: ');
+    server.listen(getPort, "0.0.0.0", () => {
+      console.log(`%s listening at ${getPort}`);
+    }); 
+  });
 });
