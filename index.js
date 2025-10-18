@@ -42,15 +42,15 @@ const getPort = PORT_LISTEN && parseInt(PORT_LISTEN) !== 0 ? PORT_LISTEN : portL
 
 conn.sync({ force: dbForce }).then(() => {  
   console.log('Ready connect to Data Base');
-  transporter.verify().then(() => {
+  server.listen(getPort, "0.0.0.0", () => {
+    console.log(`%s listening at ${getPort}`);
+  }); 
+  /* transporter.verify().then(() => {
     console.log('Ready for send emails')
-    server.listen(getPort, "0.0.0.0", () => {
-      console.log(`%s listening at ${getPort}`);
-    }); 
   }).catch((error) => {
     console.error('Error with email transporter: ');
     server.listen(getPort, "0.0.0.0", () => {
       console.log(`%s listening at ${getPort}`);
     }); 
-  });
+  }); */
 });

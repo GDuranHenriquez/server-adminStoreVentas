@@ -46,25 +46,24 @@ server.use((req, res, next) => {
 });
 
 //server.use('/', routes);
-server.use('/data-user', authenticate, routerDataUser);
+server.use('/api/data-user', authenticate, routerDataUser);
 
-server.use('/categorias', categoriasRouter);
-server.use('/productos', authenticate ,productRouter);
-server.use('/presentacion', authenticate, presentacionRouter);
-server.use('/departamento', routerDepartamento);
-server.use('/tipoDni', dniTipoRouter);
-server.use('/cliente', clientRouter);
-server.use('/ubicacionOrden', ubicacionOrdenRouter);
-server.use('/venta', authenticate, ventasRouter);
-server.use('/usuario', usuarioRouter);
-server.use('/sign-in-out', routerLoginRegister);
-server.use('/token', tokenRouter);
-server.use('/orden', orderRouter);
-server.use('/upload', express.static(path.join(__dirname, 'upload')));
+server.use('/api/categorias', categoriasRouter);
+server.use('/api/productos', authenticate ,productRouter);
+server.use('/api/presentacion', authenticate, presentacionRouter);
+server.use('/api/departamento', routerDepartamento);
+server.use('/api/tipoDni', dniTipoRouter);
+server.use('/api/cliente', clientRouter);
+server.use('/api/ubicacionOrden', ubicacionOrdenRouter);
+server.use('/api/venta', authenticate, ventasRouter);
+server.use('/api/usuario', usuarioRouter);
+server.use('/api/sign-in-out', routerLoginRegister);
+server.use('/api/token', tokenRouter);
+server.use('/api/orden', orderRouter);
+server.use('/api/upload', express.static(path.join(__dirname, 'upload')));
 
 
-// Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+server.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || err;
   console.error(err);
